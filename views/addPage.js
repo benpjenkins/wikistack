@@ -36,15 +36,15 @@ module.exports = () =>
         <label for="title" class="col-sm-2 control-label">Page Title</label>
         <div class="col-sm-10">
           <input id="title" name="title" type="text" class="form-control"
-          placeholder:'title'/>
+          placeholder='title'/>
         </div>
       </div>
 
       <div class="form-group">
         <label for="content" class="col-sm-2 control-label">Content</label>
         <div class="col-sm-10">
-          <input id="title" name="title" type="text" class="form-control"
-          placeholder:'title'/>
+          <input id="title" name="content" type="text" class="form-control"
+          placeholder="content"/>
         </div>
       </div>
 
@@ -53,8 +53,7 @@ module.exports = () =>
           >Page Status</label
         >
         <div class="col-sm-10">
-          <input id="title" name="title" type="text" class="form-control"
-          placeholder:'title'/>
+          <input id="status" name="status" type="text" class="form-control placeholder="page status"/>
         </div>
       </div>
 
