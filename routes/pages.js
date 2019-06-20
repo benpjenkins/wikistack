@@ -48,15 +48,14 @@ router.post('/', async (req, res, next) => {
 
     // userId = userId.dataValues.id;
 
-    console.log('userId :', userId);
-
     const page = await Page.create({
-      authorId: userId,
+      // authorId: userId,
       title: req.body.title,
       content: req.body.content,
       slug: generateSlug(req.body.title),
     });
 
+    page.setAuthor(userId)
     // await page.save().then(function(result) {
     //   console.log(result.dataValues);
     // });
