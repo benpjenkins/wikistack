@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { Page } = require('../models');
+const { User } = require('../models');
 const { addPage } = require('../views');
 const { wikiPage } = require('../views');
 
@@ -22,7 +23,35 @@ router.get('/add', async (req, res, next) => {
 router.post('/', async (req, res, next) => {
   //consider page.create();
   try {
+    const reqName = req.body.author;
+    const reqEmail = req.body.email;
+    // const databaseEmailResult = await User.findAll({
+    //   where: { email: reqEmail },
+    // });
+    // // console.log('TCL: databaseEmailResult', databaseEmailResult);
+    // if (!databaseEmailResult.length) {
+    //   const newUser = await User.create({
+    //     name: reqName,
+    //     email: reqEmail,
+    //   });
+    // }
+    const user = await User.findOrCreate({
+      where: { name: reqName, email: reqEmail },
+    });
+    const userId = user[0].id;
+    console.log('TCL: userId', userId);
+
+    // let userId = await User.findOne({
+    //   where: { email: reqEmail },
+    //   attributes: ['id'],
+    // });
+
+    // userId = userId.dataValues.id;
+
+    console.log('userId :', userId);
+
     const page = await Page.create({
+      authorId: userId,
       title: req.body.title,
       content: req.body.content,
       slug: generateSlug(req.body.title),

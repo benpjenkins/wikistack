@@ -21,7 +21,7 @@ console.dir('page:', page);
 const port = 1337;
 const init = async () => {
   try {
-    await models.db.sync();
+    await models.db.sync({ force: true });
   } catch (err) {
     console.log(err);
   }
@@ -39,5 +39,4 @@ app.get('/', async (req, res, next) => {
   const allPages = await Page.findAll();
   console.log(allPages);
   res.send(main(allPages));
-
 });
