@@ -55,7 +55,7 @@ router.post('/', async (req, res, next) => {
       slug: generateSlug(req.body.title),
     });
 
-    page.setAuthor(userId)
+    page.setAuthor(userId);
     // await page.save().then(function(result) {
     //   console.log(result.dataValues);
     // });
@@ -70,7 +70,12 @@ router.get('/:slug', async (req, res, next) => {
     const foundPage = await Page.findOne({
       where: { slug: req.params.slug },
     });
-    res.send(wikiPage(foundPage));
+    const author = await foundPage.getAuthor({
+      where: {
+        id: 1,
+      },
+    });
+    res.send(wikiPage(foundPage, author.dataValues));
     // res.send(`hit dynamic route at ${req.params.slug}`);
   } catch (err) {
     console.error(err);
