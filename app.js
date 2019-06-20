@@ -3,6 +3,8 @@ const morgan = require('morgan');
 const layout = require('./views/layout.js');
 const Sequelize = require('sequelize');
 const models = require('./models/index.js');
+const { Page } = require('./models');
+const { main } = require('./views');
 
 const app = express();
 
@@ -34,5 +36,8 @@ app.use('/wiki', require('./routes/pages'));
 // app.use('/user', require('./routes/user.js'));
 
 app.get('/', async (req, res, next) => {
-  res.redirect('/wiki');
+  const allPages = await Page.findAll();
+  console.log(allPages);
+  res.send(main(allPages));
+
 });

@@ -31,7 +31,7 @@ router.post('/', async (req, res, next) => {
     // await page.save().then(function(result) {
     //   console.log(result.dataValues);
     // });
-    res.redirect('/');
+    res.redirect(`/wiki/${page.slug}`);
   } catch (err) {
     console.error(err);
   }
