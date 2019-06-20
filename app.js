@@ -13,7 +13,8 @@ app.use(express.urlencoded({ extended: false }));
 // db.authenticate().then(() => {
 //   console.log('connected to the database');
 // });
-
+const page = require('./routes/pages.js')
+console.dir('page:', page);
 //remember to wrap
 const port = 1337;
 const init = async () => {
@@ -28,6 +29,9 @@ const init = async () => {
 };
 
 init();
+
+app.use('/wiki', require('./routes/pages'));
+// app.use('/user', require('./routes/user.js'));
 
 app.get('/', async (req, res, next) => {
   res.send(layout('a'));
