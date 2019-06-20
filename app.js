@@ -18,8 +18,7 @@ app.use(express.urlencoded({ extended: false }));
 const port = 1337;
 const init = async () => {
   try {
-    await models.User.sync();
-    await models.Page.sync();
+    await models.db.sync();
   } catch (err) {
     console.log(err);
   }
